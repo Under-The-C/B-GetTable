@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-mysql/data:/var/lib/mysql
+    networks:
+      - deep-sea
+    tty: true
+
+  spring:
+    image: my_spring
+    build: ./backend-spring
+    container_name: spring
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - ./backend-spring/Backend:/Backend
+    networks:
+      - deep-sea
+    tty: true
+
+  react:
+    image: my_react
+    build: ./frontend-react
+    container_name: react
+    depends_on:
+      - spring
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react/Frontend:/Frontend
+    networks:
+      - deep-sea
+    tty: true
+
+networks:
+  deep-sea:
+    driver: bridge
