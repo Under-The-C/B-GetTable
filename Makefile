@@ -25,12 +25,10 @@ clean :
 
 tclean :
 	docker compose -f ./build-test/docker-compose.yml down --remove-orphans --rmi all --volumes
-	rm -rf build-test/data
 
 fclean : clean
 	docker network prune --force
 	docker volume prune --force
 	docker system prune --all --force --volumes
-	rm -rf db-mysql/data
 
 re : fclean all
