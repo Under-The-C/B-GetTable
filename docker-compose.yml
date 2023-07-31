@@ -10,9 +10,7 @@ services:
     ports:
       - "${MYSQL_PORT}:${MYSQL_PORT}"
     volumes:
-      - ./db-mysql/data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: password
+      - mysql_volume:/var/lib/mysql
     networks:
       - deep-sea
     tty: true
@@ -28,8 +26,8 @@ services:
       - .env
     ports:
       - "${SPRING_PORT}:${SPRING_PORT}"
-    #volumes:
-    #  - ./backend-spring/Backend:/Backend
+    volumes:
+      - spring_volume:/Backend
     networks:
       - deep-sea
     tty: true
@@ -45,11 +43,16 @@ services:
       - .env
     ports:
       - "${REACT_PORT}:${REACT_PORT}"
-    #volumes:
-    #  - ./frontend-react/Frontend:/Frontend
+    volumes:
+      - react_volume:/Frontend
     networks:
       - deep-sea
     tty: true
+
+volumes:
+  mysql_volume:
+  spring_volume:
+  react_volume:
 
 networks:
   deep-sea:
