@@ -20,7 +20,7 @@ services:
     build: ./backend-spring
     container_name: spring
     depends_on:
-      - react
+      - mysql
     restart: always
     env_file:
       - .env
@@ -37,7 +37,7 @@ services:
     build: ./frontend-react
     container_name: react
     depends_on:
-      - mysql
+      - spring
     restart: always
     env_file:
       - .env
