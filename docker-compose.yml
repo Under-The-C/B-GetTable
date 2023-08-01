@@ -17,7 +17,12 @@ services:
 
   spring:
     image: my_spring
-    build: ./backend-spring
+    build:
+      context: ./backend-spring
+      args:
+        - GIT_URL=${BACKEND_GIT_URL}
+        - GIT_BRANCH=${BACKEND_GIT_BRANCH}
+        - MY_WORKDIR=${BACKEND_WORKDIR}
     container_name: spring
     depends_on:
       - mysql
@@ -34,7 +39,12 @@ services:
 
   react:
     image: my_react
-    build: ./frontend-react
+    build:
+      context: ./frontend-react
+      args:
+        - GIT_URL=${FRONTEND_GIT_URL}
+        - GIT_BRANCH=${FRONTEND_GIT_BRANCH}
+        - MY_WORKDIR=${FRONTEND_WORKDIR}
     container_name: react
     depends_on:
       - spring
