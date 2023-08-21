@@ -12,7 +12,7 @@ services:
     volumes:
       - mysql_volume:/var/lib/mysql
     networks:
-      - deep-sea
+      - 42_network
     tty: true
 
   spring:
@@ -34,36 +34,13 @@ services:
     volumes:
       - spring_volume:/Backend
     networks:
-      - deep-sea
-    tty: true
-
-  react:
-    image: my_react
-    build:
-      context: ./frontend-react
-      args:
-        - GIT_URL=${FRONTEND_GIT_URL}
-        - GIT_BRANCH=${FRONTEND_GIT_BRANCH}
-        - MY_WORKDIR=${FRONTEND_WORKDIR}
-    container_name: react
-    depends_on:
-      - spring
-    restart: always
-    env_file:
-      - .env
-    ports:
-      - "${REACT_PORT}:${REACT_PORT}"
-    volumes:
-      - react_volume:/Frontend
-    networks:
-      - deep-sea
+      - 42_network
     tty: true
 
 volumes:
   mysql_volume:
   spring_volume:
-  react_volume:
 
 networks:
-  deep-sea:
+  42_network:
     driver: bridge

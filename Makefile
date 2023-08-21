@@ -8,10 +8,8 @@ $(NAME) :
 start :
 	docker start mysql
 	docker start spring
-	docker start react
 
 stop :
-	docker stop react
 	docker stop spring
 	docker stop mysql
 
