@@ -8,6 +8,7 @@ RUN apk update && apk add git && \
 	git clone -b $GIT_BRANCH $GIT_URL $MY_WORKDIR
 
 COPY fastbuild.sh $MY_WORKDIR
+COPY resources/* $MY_WORKDIR/src/main/resources
 
 WORKDIR $MY_WORKDIR
 
