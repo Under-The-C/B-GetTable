@@ -1,10 +1,14 @@
-FROM openjdk:17-alpine
+FROM ubuntu:latest
 
 ARG GIT_URL
 ARG GIT_BRANCH
 ARG MY_WORKDIR
 
-RUN apk update && apk add git && \
+RUN apt-get update && apt-get upgrade
+
+RUN sudo apt-get install openjdk-17-jdk
+
+RUN apt-get install git && \
 	git clone -b $GIT_BRANCH $GIT_URL $MY_WORKDIR
 
 COPY fastbuild.sh $MY_WORKDIR
