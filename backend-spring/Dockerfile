@@ -6,9 +6,9 @@ ARG MY_WORKDIR
 
 RUN apt-get update && apt-get upgrade
 
-RUN apt-get install openjdk-17-jdk
+RUN apt-get install -y openjdk-17-jdk
 
-RUN apt-get install git && \
+RUN apt-get install -y git && \
 	git clone -b $GIT_BRANCH $GIT_URL $MY_WORKDIR
 
 COPY fastbuild.sh $MY_WORKDIR
